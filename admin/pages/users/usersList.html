@@ -1,0 +1,54 @@
+<section class="content-header" ng-init="getUserList()">
+  <h1 class="">
+    Users list
+    <small>mangage users</small>
+  </h1>
+  <button class="btn btn-primary pull-right" ui-sref="adduser"><i class="fa fa-plus"></i> Add Users</button>
+</section>
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Manage Users</h3>
+        </div>
+        <div class="box-body">
+          <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>User Role</th>
+                <th>Status</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in userList" ng-if="user.user_type != '1'">
+                <td>{{user.id}}</td>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.mobile}}</td>
+                <td ng-if="user.user_type == '3'">Enterer</td>
+                <td ng-if="user.user_type == '2'">Verifier</td>
+                <td>
+                  <span ng-if="user.status == '1'" class="label label-success">Active</span>
+                  <span class="label label-danger" ng-if="user.status == '0'">Inactive</span>
+                </td>
+                <td>
+                  <a href="" class="option-btn" ng-click="goToEdit(user.id)"><i class="fa fa-pencil-square-o"></i></a>
+                  <a href="" class="option-btn" ng-click="deleteUser(user.id)"><i class="fa fa-trash"></i></a>
+                  <a href="" class="option-btn" ng-if="user.status == '1'" ng-click="changeStatus(user.id,0,$index)"><span class="label label-danger">Deactivate</span></a>
+                  <a href="" class="option-btn" ng-if="user.status == '0'" ng-click="changeStatus(user.id,1,$index)"><span class="label label-success">Activate</span></a>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

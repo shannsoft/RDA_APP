@@ -1,0 +1,65 @@
+<section class="content-header">
+  <h1>
+    Building Plan
+    <small>Control panel</small>
+  </h1>
+</section>
+<section class="content">
+  <div class="uploadplan">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Building plan upload</h3>
+      </div>
+      <form class="form-horizontal" name="paln">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">Full Name</label>
+            <div class="col-sm-8" ng-class="{'has-error': (paln.full_name.$invalid && paln.full_name.$touched)}">
+              <input type="text" class="form-control" placeholder="Full Name" name="full_name" ng-model="buildingPlan.name" required ng-pattern="/^(\D)+$/">
+              <span class="help-block" ng-show="paln.full_name.$error.required && paln.full_name.$touched">Please enter Full name</span>
+              <span class="help-block" ng-show="paln.full_name.$error.pattern && paln.full_name.$touched">Please enter valid name</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-3 control-label">Registration No.</label>
+            <div class="col-sm-8" ng-class="{'has-error': (paln.regNo.$invalid && paln.regNo.$touched)}">
+              <input type="text" class="form-control" name="regNo" placeholder="Registration No." ng-model="buildingPlan.regdNo" ng-pattern="/^[0-9]+$/" required>
+              <span class="help-block" ng-show="paln.regNo.$error.required && paln.regNo.$touched">Please enter registration number</span>
+              <span class="help-block" ng-show="paln.regNo.$error.pattern && paln.regNo.$touched">Please enter valid Number</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-3 control-label">Date</label>
+            <div class="col-sm-8">
+                <!-- <input type="text" class="form-control pull-right" id="datepicker" ng-model="buildingPlan.date"> -->
+                <!-- <div date-picker="dates.today" id="pickerMinDateDiv" min-date="minDate" view="date" min-view="hours" timezone="UTC" watch-direct-changes="true"></div> -->
+                <p class="input-group">
+                  <input type="text" class="form-control" uib-datepicker-popup ng-model="buildingPlan.date" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-3 control-label">Upload File</label>
+            <div class="col-sm-8">
+                <input type = "file" file-model = "myFile">
+            </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <section  align="center">
+              <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="close()">{{alert.msg}}</alert>
+          </section>
+          <button type="submit" class="btn btn-default" ui-sref="buildingPlan">Back</button>
+          <button type="submit" class="btn btn-info pull-right" ng-click="uploadBuildingPlan()" ng-disabled="plan.$invalid || paln.regNo.$invalid  || paln.full_name.$invalid   || !buildingPlan.date">Submit</button>
+        </div>
+        <!-- /.box-footer -->
+      </form>
+        <!-- <input type = "file" file-model = "myFile"/>
+         <button ng-click = "uploadFile()">upload me</button> -->
+    </div>
+  </div>
+</section>
