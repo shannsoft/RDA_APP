@@ -495,17 +495,34 @@ header('Access-Control-Allow-Origin: *');
 					}
 				}
 				public function planCount() {
-					// $headers = apache_request_headers(); // to get all the headers
-					// $accessToken = $headers['accessToken'];
-					$verifier_id = $this->_request['verifier_id'];
+					$headers = apache_request_headers(); // to get all the headers
+					$accessToken = $headers['accessToken'];
+					if($accessToken){
+						$sql = "select id,user_type from ".self::usersTable." where token = '$accessToken'";
+						$rows = $this->executeGenericDQLQuery($sql);
+						$userId = $rows[0]['id'];
+						$usertype = $rows[0]['user_type'];
+					}
 					$planCount = array();
-					$sql = "SELECT * FROM ".self::planTable." where verifier_id=".$verifier_id." AND status = 'rejected'";
+					$sql = "SELECT * FROM ".self::planTable." where status = 'rejected'";
+					if($usertype && $usertype == 2)
+						$sql .=" AND verifier_id=".$userId;
+					else if($usertype && $usertype == 3)
+						$sql .=" AND user=".$userId;
 					$result = $this->executeGenericDQLQuery($sql);
 					$planCount['rejected'] = sizeof($result);
-					$sql = "SELECT * FROM ".self::planTable." where verifier_id=".$verifier_id." AND status = 'approved'";
+
+					$sql = "SELECT * FROM ".self::planTable." where status = 'approved'";
+					if($usertype && $usertype == 2)
+						$sql .=" AND verifier_id=".$userId;
+					else if($usertype && $usertype == 3)
+						$sql .=" AND user=".$userId;
 					$result = $this->executeGenericDQLQuery($sql);
 					$planCount['approved'] = sizeof($result);
+
 					$sql = "SELECT * FROM ".self::planTable." where status = 'pending'";
+					if($usertype && $usertype == 3)
+						$sql .=" AND user=".$userId;
 					$result = $this->executeGenericDQLQuery($sql);
 					$planCount['pending'] = sizeof($result);
 					$this->sendResponse(200,'success','No.of count on all plan List',$planCount);
