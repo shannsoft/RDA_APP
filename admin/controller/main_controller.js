@@ -1,4 +1,4 @@
-app.controller("Main_Controller",function($scope,$rootScope,$state,$localStorage,userService,Util){
+app.controller("Main_Controller",function($scope,$rootScope,$state,$localStorage,userService,Util,buildingPlan){
   /*******************************************************/
   /*************This is use for check user login**********/
   /*******************************************************/
@@ -57,7 +57,18 @@ app.controller("Main_Controller",function($scope,$rootScope,$state,$localStorage
       console.log(">>>>>>>>>>>>>   ",err);
     })
   }
+  
+  $scope.planstatus = function () {
+    buildingPlan.buildingPlanstatus().then(function(response){
+      console.log(response);
+      $scope.planstatus = response.data.data;
+        
+    });
+  } 
 });
+
+
+
 app.controller("userController",function($scope,$state,$localStorage,userService,$stateParams,Util){
   /*******************************************************/
   /*************This is use for get the user list*********/
@@ -304,6 +315,9 @@ app.controller("BuildingPlanController",function($scope,$rootScope,$state,$local
 
     return '';
   }
+  
+    
+    
   /*
   * adding codes for the date picker ends
   */

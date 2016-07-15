@@ -4,12 +4,12 @@
     <small>Control panel</small>
   </h1>
 </section>
-<section class="content" >
+<section class="content" ng-init="planstatus()">
   <div class="row">
     <div class="col-lg-4 col-xs-6">
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>150</h3>
+          <h3>{{planstatus.pending}}</h3>
           <p>Pending Plan for Approval</p>
         </div>
         <div class="icon">
@@ -21,7 +21,7 @@
     <div class="col-lg-4 col-xs-6">
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>53<sup style="font-size: 20px">%</sup></h3>
+          <h3>{{planstatus.approved}}</h3>
           <p>Already Approved</p>
         </div>
         <div class="icon">
@@ -33,7 +33,7 @@
     <div class="col-lg-4 col-xs-6">
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>44</h3>
+          <h3>{{planstatus.rejected}}</h3>
           <p>Rejected List</p>
         </div>
         <div class="icon">

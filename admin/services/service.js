@@ -135,6 +135,16 @@ app.factory('buildingPlan', function ($http,CONFIG) {
          }
      });
      return response;
+   },
+   buildingPlanstatus: function () {
+    var response = $http.get(CONFIG.HTTP_HOST + "/?reqmethod=planCount", {
+        headers: {
+            'accessToken': localStorage.getItem('accessToken')
+        }
+    });
+    return response;
+    console.log('response');
    }
  }
 });
+
