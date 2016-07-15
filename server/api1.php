@@ -15,7 +15,7 @@ header('Access-Control-Allow-Origin: *');
 		const DB_SERVER = "localhost";
 		const DB_USER = "root";
 		const DB_PASSWORD = "";
-	  const DB = "rdadb";
+	  const DB = "rda_123";
 		// adding table names
 		const usersTable = "users";
 		const planTable = "buiding_plan";
