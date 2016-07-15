@@ -527,6 +527,36 @@ header('Access-Control-Allow-Origin: *');
 					$planCount['pending'] = sizeof($result);
 					$this->sendResponse(200,'success','No.of count on all plan List',$planCount);
 				}
+				public function getPlanBystatus() {
+					$headers = apache_request_headers(); // to get all the headers
+					$accessToken = $headers['accessToken'];
+					$status = $this->_request['status'];
+					if($accessToken){
+						$sql = "select id,user_type from ".self::usersTable." where token = '$accessToken'";
+						$rows = $this->executeGenericDQLQuery($sql);
+						$userId = $rows[0]['id'];
+						$usertype = $rows[0]['user_type'];
+					}
+					$sql = "SELECT * FROM ".self::planTable." where status = '$status'";
+					if($usertype && $usertype == 2)
+						$sql .=" AND verifier_id=".$userId;
+					else if($usertype && $usertype == 3)
+						$sql .=" AND user=".$userId;
+					$rows = $this->executeGenericDQLQuery($sql);
+					$plan = array();
+					for($i = 0; $i < sizeof($rows); $i++) {
+						$plan[$i]['id'] = $rows[$i]['id'];
+						$plan[$i]['user_id'] = $rows[$i]['user'];
+						$plan[$i]['name'] = $rows[$i]['name'];
+						$plan[$i]['regdNo'] = $rows[$i]['regdNo'];
+						$plan[$i]['filepath'] = $rows[$i]['file_path'];
+						$plan[$i]['status'] = $rows[$i]['status'];
+						$plan[$i]['remark'] = $rows[$i]['remark'];
+						$plan[$i]['date'] = $rows[$i]['date'];
+						$plan[$i]['asset_name'] = $rows[$i]['asset_name'];
+					}
+					$this->sendResponse2(200,$this->messages['dataFetched'],$plan);
+				}
 				public function user() {
 						if(!isset($this->_request['operation']))
 							$this->sendResponse2(400,$this->messages['operationNotDefined']);
