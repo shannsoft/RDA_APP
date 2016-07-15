@@ -242,16 +242,15 @@ app.controller("BuildingPlanController",function($scope,$rootScope,$state,$local
   /*********This is use for load building list************/
   /*******************************************************/
   $scope.planAcceptance = function(remark,status,id){
-    console.log(remark);
-    console.log(status);
-    console.log(id);
     var obj = {
       "id":id,
       "status":status,
-      "remark":remark
+      "remark":remark,
+      "verifier_id":$scope.profile.id
     }
     buildingPlan.updateAcceptance(obj).then(function(response){
       console.log(response);
+      $scope.loadbuildingPlan();
     });
   }
   /*******************************************************/

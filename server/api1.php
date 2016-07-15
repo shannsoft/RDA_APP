@@ -487,11 +487,28 @@ header('Access-Control-Allow-Origin: *');
 					$plan_id = $plan_data['id'];
 					$plan_status = $plan_data['status'];
 					$plan_remark = $plan_data['remark'];
-					$sql = "update ".self::planTable." set status = '$plan_status', remark = '$plan_remark' where id=".$plan_id;
+					$verifier_id = $plan_data['verifier_id'];
+					$sql = "update ".self::planTable." set status = '$plan_status', remark = '$plan_remark', verifier_id=".$verifier_id." where id=".$plan_id;
 					$result = $this->executeGenericDMLQuery($sql);
 					if($result){
 						$this->sendResponse2(200,$this->messages['userUpdated']);
 					}
+				}
+				public function planCount() {
+					// $headers = apache_request_headers(); // to get all the headers
+					// $accessToken = $headers['accessToken'];
+					$verifier_id = $this->_request['verifier_id'];
+					$planCount = array();
+					$sql = "SELECT * FROM ".self::planTable." where verifier_id=".$verifier_id." AND status = 'rejected'";
+					$result = $this->executeGenericDQLQuery($sql);
+					$planCount['rejected'] = sizeof($result);
+					$sql = "SELECT * FROM ".self::planTable." where verifier_id=".$verifier_id." AND status = 'approved'";
+					$result = $this->executeGenericDQLQuery($sql);
+					$planCount['approved'] = sizeof($result);
+					$sql = "SELECT * FROM ".self::planTable." where status = 'pending'";
+					$result = $this->executeGenericDQLQuery($sql);
+					$planCount['pending'] = sizeof($result);
+					$this->sendResponse(200,'success','No.of count on all plan List',$planCount);
 				}
 				public function user() {
 						if(!isset($this->_request['operation']))
