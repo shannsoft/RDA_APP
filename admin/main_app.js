@@ -45,7 +45,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
               }
           }
       })
-
     .state('users', {
         templateUrl: 'pages/users/usersList.html',
         url: '/users',
@@ -65,6 +64,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'pages/users/userProfile.html',
         url: '/userProfile',
         controller: "userController"
+    })
+    .state('buildingPlanStatuslist',{
+      templateUrl:'pages/buildingPlanStatuslist.html',
+      url:'/buildingPlanStatuslist',
+      controller:"BuildingPlanController"
     })
 });
 app.constant('CONFIG', {

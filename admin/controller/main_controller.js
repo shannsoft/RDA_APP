@@ -57,18 +57,18 @@ app.controller("Main_Controller",function($scope,$rootScope,$state,$localStorage
       console.log(">>>>>>>>>>>>>   ",err);
     })
   }
-  
+
   $scope.planstatus = function () {
     buildingPlan.buildingPlanstatus().then(function(response){
       console.log(response);
       $scope.planstatus = response.data.data;
-        
     });
-  } 
+  }
+  $scope.viewplanstatus = function (status){
+    localStorage.setItem('status',status);
+    $state.go("buildingPlanStatuslist");
+  }
 });
-
-
-
 app.controller("userController",function($scope,$state,$localStorage,userService,$stateParams,Util){
   /*******************************************************/
   /*************This is use for get the user list*********/
@@ -315,9 +315,9 @@ app.controller("BuildingPlanController",function($scope,$rootScope,$state,$local
 
     return '';
   }
-  
-    
-    
+
+
+
   /*
   * adding codes for the date picker ends
   */
@@ -325,4 +325,11 @@ app.controller("BuildingPlanController",function($scope,$rootScope,$state,$local
   $scope.open2 = function() {
    $scope.popup2.opened = true;
  };
+
+ $scope.loadPlanByStatus = function(){
+   $scope.status = localStorage.getItem('status');
+   buildingPlan.loadPlanByStatus($scope.status).then(function(response){
+     $scope.planList = response.data.data;
+   })
+ }
 });

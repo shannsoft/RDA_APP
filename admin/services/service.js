@@ -144,7 +144,14 @@ app.factory('buildingPlan', function ($http,CONFIG) {
     });
     return response;
     console.log('response');
-   }
+  },
+  loadPlanByStatus:function(status){
+    var response = $http.get(CONFIG.HTTP_HOST + "?reqmethod=getPlanBystatus&status="+status,{
+      headers: {
+          'accessToken': localStorage.getItem('accessToken')
+      }
+    });
+    return response;
+  }
  }
 });
-

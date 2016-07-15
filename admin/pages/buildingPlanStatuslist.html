@@ -1,0 +1,42 @@
+<section class="content-header">
+  <h1>
+    Building Plan List
+    <small>Control panel</small>
+  </h1>
+</section>
+<section class="content" ng-init="loadPlanByStatus()">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title" style="text-transform: capitalize;">{{status}} Building Plans</h3>
+        </div>
+        <div class="box-body">
+          <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>SL.NO</th>
+                <th>Name</th>
+                <th>Reg.No</th>
+                <th>Date</th>
+                <th>Document</th>
+                <th>Remarks</th>
+                <th ng-if="user_type == '3'">Option</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="plan in planList">
+                <td>{{$index+1}}</td>
+                <td>{{plan.name}}</td>
+                <td>{{plan.regdNo}}</td>
+                <td>{{plan.date}}</td>
+                <td><a href="../server/{{plan.filepath}}" target="_blank">View</a></td>
+                <td>{{plan.remark}}</td>
+                <td ng-if="user_type == '3'"> <button type="button" class="btn btn-block btn-info btn-xs">Edit</button></td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
