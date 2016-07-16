@@ -549,6 +549,38 @@ header('Access-Control-Allow-Origin: *');
 					$planCount['pending'] = sizeof($result);
 					$this->sendResponse(200,'success','No.of count on all plan List',$planCount);
 				}
+				/*
+				* Function : getPlans
+				This function can be used to give various results based on the parameters passed to it
+
+				#  plans based on the status - if 'status' send as the parameter
+				#  (YET TO implemented) All the plans if status is not mentioned - This will be the case for the verifier and the super admin
+				#  (YET TO implemented) Plans based on the user Id - If the user id is mentioned
+
+				*/
+				public function getPlans() {
+					$sql = "SELECT * FROM ".self::planTable;
+
+					if(isset($this->_request['status'])){
+						$status = $this->_request['status'];
+						$sql.=" where status='$status'";
+					}
+					$rows = $this->executeGenericDQLQuery($sql);
+					$data = array();
+					for($i=0;$i<sizeof($rows);$i++){
+						$data[$i]['id'] = $rows[$i]['id'];
+						$data[$i]['user'] = $rows[$i]['user'];
+						$data[$i]['name'] = $rows[$i]['name'];
+						$data[$i]['regdNo'] = $rows[$i]['regdNo'];
+						$data[$i]['file_path'] = $rows[$i]['file_path'];
+						$data[$i]['status'] = $rows[$i]['status'];
+						$data[$i]['verifier_id'] = $rows[$i]['verifier_id'];
+						$data[$i]['remark'] = $rows[$i]['remark'];
+						$data[$i]['date'] = $rows[$i]['date'];
+						$data[$i]['asset_name'] = $rows[$i]['asset_name'];
+					}
+					$this->sendResponse2(200,$this->messages['dataFetched'],$data);
+				}
 				public function user() {
 						if(!isset($this->_request['operation']))
 							$this->sendResponse2(400,$this->messages['operationNotDefined']);
