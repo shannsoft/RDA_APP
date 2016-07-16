@@ -10,7 +10,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 if (!localStorage.getItem('accessToken')) {
                     $state.go('login');
                 }
-            }
+            },
+            controller:"Main_Controller"
         })
         .state('login', {
             templateUrl: 'pages/login.html',
@@ -68,6 +69,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('buildingPlanStatuslist',{
       templateUrl:'pages/buildingPlanStatuslist.html',
       url:'/buildingPlanStatuslist',
+      controller:"BuildingPlanController"
+    })
+    .state('editplan',{
+      templateUrl:'pages/users/editplan.html',
+      url:'/editplan/:id',
       controller:"BuildingPlanController"
     })
 });
