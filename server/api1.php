@@ -105,12 +105,21 @@ header('Access-Control-Allow-Origin: *');
 				if (method_exists($this, $func)) {
 					$this->$func();
 				} else{
-					$this->log('invalid service:'.$func, true, 'log_invalid.txt');
+					// $this->log('invalid service:'.$func, true, 'log_invalid.txt');
+					$this->log('invalid service:'.$func." at ".date("Y-m-d H:i:s"));
 					$this->response('invalid service', 406);
 				}
 			}
 			else
 				echo "invalid function";
+		}
+		/*
+		* This is used to make a log of the error in the server end
+		* (Yet to implemented) A log class that will create logs in the different files according to the type of the logs
+		* like for logs for the server errors , information logs will be store in the different files
+		*/
+		public function log($logText,$type = 3 ,$destFile= 'error_log.txt'){
+			error_log("\n".$logText,$type,$destFile);
 		}
 		public function json($data){
         if(is_array($data))
