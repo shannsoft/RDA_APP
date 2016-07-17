@@ -32,7 +32,7 @@
                 <td>{{plan.date}}</td>
                 <td><a href="../server/{{plan.filepath}}" target="_blank">View</a></td>
                 <td>{{plan.remark}}</td>
-                <td ng-if="user_type == '3'"> <button type="button" class="btn btn-block btn-info btn-xs">Edit</button></td>
+                <td ng-if="user_type == '3'"> <button ng-click="goToeditplan(plan.id)" type="button" class="btn btn-block btn-info btn-xs" >Edit</button></td>
               </tr>
           </table>
         </div>

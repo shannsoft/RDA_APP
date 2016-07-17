@@ -238,7 +238,7 @@ app.controller("userController",function($scope,$state,$localStorage,userService
     })
   }
 });
-app.controller("BuildingPlanController",function($scope,$rootScope,$state,$localStorage,userService,buildingPlan,CONFIG,Util){
+app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,$state,$localStorage,userService,buildingPlan,CONFIG,Util){
   $scope.buildingPlan = {};
   /*******************************************************/
   /*********This is use for load building list************/
@@ -331,5 +331,20 @@ app.controller("BuildingPlanController",function($scope,$rootScope,$state,$local
    buildingPlan.loadPlanByStatus($scope.status).then(function(response){
      $scope.planList = response.data.data;
    })
+ };
+ $scope.goToeditplan = function(id){
+   console.log(id);
+   $state.go('editplan',{id:id});
+ }
+ $scope.loadPlanByID = function(){
+   var planid = $stateParams.id;
+   buildingPlan.loadPlanByID(planid).then(function(pRes) {
+     if(pRes.status == 200){
+       console.log(pRes);
+       $scope.buildingPlan = pRes.data.data;
+     }
+   },function(err) {
+     console.log(">>>>>>>>>>>>>   ",err);
+   });
  }
 });
