@@ -60,7 +60,7 @@
               <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="close()">{{alert.msg}}</alert>
           </section>
           <button type="submit" class="btn btn-default" ui-sref="buildingPlanStatuslist">Cancel</button>
-          <button type="submit" class="btn btn-info pull-right" ng-click="uploadBuildingPlan()" ng-disabled="plan.$invalid || paln.regNo.$invalid  || paln.full_name.$invalid   || !buildingPlan.date">Update</button>
+          <button type="submit" class="btn btn-info pull-right" ng-click="updatebuildingplan()" ng-disabled="plan.$invalid || paln.regNo.$invalid  || paln.full_name.$invalid   || !buildingPlan.date">Update</button>
         </div>
         <!-- /.box-footer -->
       </form>

@@ -329,6 +329,7 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
  $scope.loadPlanByStatus = function(){
    $scope.status = localStorage.getItem('status');
    buildingPlan.loadPlanByStatus($scope.status).then(function(response){
+     console.log(response.data.data);
      $scope.planList = response.data.data;
    })
  };
@@ -347,4 +348,17 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
      console.log(">>>>>>>>>>>>>   ",err);
    });
  }
+ $scope.updatebuildingplan = function(){
+    var file = $scope.myFile;
+    $scope.buildingPlan.date = moment($scope.buildingPlan.date).format("YYYY-MM-DD");
+    var uploadUrl = CONFIG.HTTP_HOST;
+    buildingPlan.updatebuildingplan(file, uploadUrl,$scope.buildingPlan).then(function(response){
+      if(response.status == 200){
+        Util.alertMessage('success', response.data.message);
+      }
+      else{
+        Util.alertMessage('danger', response.data.message);
+      }
+    })
+ };
 });

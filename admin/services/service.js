@@ -160,6 +160,20 @@ app.factory('buildingPlan', function ($http,CONFIG) {
       }
     });
     return response;
+  },
+  updatebuildingplan : function(file, uploadUrl,data){
+     var fd = new FormData();
+     fd.append('file', file);
+     fd.append('reqmethod', "updatePlan");
+     fd.append('name', data.name);
+     fd.append('regdNo', data.regdNo);
+     fd.append('date', data.date);
+     fd.append('id',data.id);
+     var response = $http.post(uploadUrl, fd, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined , 'accessToken':localStorage.getItem('accessToken')}
+     });
+     return response;
   }
  }
 });

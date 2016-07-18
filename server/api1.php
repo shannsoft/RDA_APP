@@ -466,7 +466,7 @@ header('Access-Control-Allow-Origin: *');
 					$date = $this->_request['date'];
 					$regdNo = $this->_request['regdNo'];
 					if($accessToken){
-						$sql = "update ".self::planTable." set name = '$name', regdNo = '$regdNo', date= '$date'"
+						$sql = "update ".self::planTable." set name = '$name', regdNo = '$regdNo', date= '$date'";
 						if(isset($_FILES['file'])){
 							$file_name = $_FILES['file']['name'];
 							$file_size = $_FILES['file']['size'];
