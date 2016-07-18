@@ -458,6 +458,39 @@ header('Access-Control-Allow-Origin: *');
 			        print_r($errors);
 			    }
 				}
+				public function updatePlan() {
+					$headers = apache_request_headers(); // to get all the headers
+					$accessToken = $headers['accessToken'];
+					$plan_id = $this->_request['id'];
+					$name = $this->_request['name'];
+					$date = $this->_request['date'];
+					$regdNo = $this->_request['regdNo'];
+					if($accessToken){
+						$sql = "update ".self::planTable." set name = '$name', regdNo = '$regdNo', date= '$date'"
+						if(isset($_FILES['file'])){
+							$file_name = $_FILES['file']['name'];
+							$file_size = $_FILES['file']['size'];
+							$file_tmp = $_FILES['file']['tmp_name'];
+							$file_type= $_FILES['file']['type'];
+							$file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+							$extensions = array("pdf");
+							if(in_array($file_ext,$extensions )=== false){
+							 $this->sendResponse(201,"Error","Its allow only pdf file");
+							}
+							if($file_size > 2097152){
+								$this->sendResponse(201,"Error","File size cannot exceed 2 MB");
+							}
+							move_uploaded_file($file_tmp,self::planUploadPath.$file_name);
+							$filePath = self::planUploadPath.$file_name;
+							$sql .= ", file_path='$filePath'";
+						}
+						$sql .= " where id=".$plan_id;
+						$result = $this->executeGenericDMLQuery($sql);
+						if($result){
+							$this->sendResponse2(200,$this->messages['userUpdated']);
+						}
+					}
+				}
 				public function allBuildingPlan(){
 					$headers = apache_request_headers(); // to get all the headers
 					$accessToken = $headers['accessToken'];
