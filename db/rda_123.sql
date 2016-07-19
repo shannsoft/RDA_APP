@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2016 at 08:37 AM
+-- Generation Time: Jul 19, 2016 at 02:53 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -44,9 +44,9 @@ CREATE TABLE `buiding_plan` (
 --
 
 INSERT INTO `buiding_plan` (`id`, `user`, `name`, `regdNo`, `file_path`, `status`, `verifier_id`, `remark`, `date`, `asset_name`) VALUES
-(43, 29, 'Ashok Kumar Agrawal', '938', 'buildingPlan/Permission-letter-of-Building-Plan.pdf', 'approved', NULL, 'asdfasdf', '2016-04-04', NULL),
-(44, 29, 'Bandana Nayak', '943', 'buildingPlan/Permission-letter-of-Building-Plan-2.pdf', 'pending', NULL, NULL, '2016-04-04', NULL),
-(45, 31, 'Test', '123', 'buildingPlan/doc20160409200026.pdf', 'rejected', NULL, 'Due to wrong file', '2016-06-27', NULL);
+(43, 29, 'Ashok Kumar Agrawal', '938', 'buildingPlan/Permission-letter-of-Building-Plan.pdf', 'approved', 30, 'asdfasdf', '2016-04-04', NULL),
+(44, 29, 'Bandana Nayak', '943', 'buildingPlan/Permission-letter-of-Building-Plan-2.pdf', 'approved', 30, '', '2016-04-04', NULL),
+(45, 31, 'Test Edit', '123', 'buildingPlan/doc20160409200026.pdf', 'pending', 30, 'Due to wrong file', '2016-06-27', NULL);
 
 -- --------------------------------------------------------
 
@@ -72,9 +72,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `user_name`, `mobile`, `password`, `email`, `first_name`, `last_name`, `token`, `status`) VALUES
-(28, '1', 'Admin', '8446753743', 'e10adc3949ba59abbe56e057f20f883e', 'admin@gmail.com', 'Rourkela', 'Admin', '04C9kleL6Od13N23n8GqPcBfANM7ojE6tyeOxSXlN8NiYFfJhjfhspg1IOiy', 1),
-(29, '3', 'santoshRDA', '9438753143', 'e10adc3949ba59abbe56e057f20f883e', 'santosh@gmail.com', 'Krishna', 'Majhi', 'N5hRqZMn18DjHIEB2tcK7C6HySJWrsTqm4YCpXMvcPFxMUuHNTzrj1MLU0r6', 0),
-(30, '2', 'biswalRDA', '8895368590', 'e10adc3949ba59abbe56e057f20f883e', 'biswal@gmail.com', 'Rajashree', 'Biswal', 'I4prjV2fMO8uJp4DfXHEVbk1RiPGE1x8nzjlDFtKxwSmERRC5ThurmssNsgu', 1),
+(28, '1', 'Admin', '8446753743', 'e10adc3949ba59abbe56e057f20f883e', 'admin@gmail.com', 'Rourkela', 'Admin', '', 1),
+(29, '3', 'santoshRDA', '9438753143', 'e10adc3949ba59abbe56e057f20f883e', 'santosh@gmail.com', 'Krishna', 'Majhi', '', 1),
+(30, '2', 'biswalRDA', '8895368590', 'e10adc3949ba59abbe56e057f20f883e', 'biswal@gmail.com', 'Rajashree', 'Biswal', 'kVOrJlJj1M9CMWpP73kUBQhklw64WO8AuVcQzzGkgZoZcTHisvqfCwUhMb1n', 1),
 (31, '3', 'amareshRDA', '8895368590', 'e10adc3949ba59abbe56e057f20f883e', 'amaresh11@gmail.com', 'Amaresh', 'Nayak', '', 1);
 
 --
