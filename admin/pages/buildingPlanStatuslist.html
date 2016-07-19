@@ -20,8 +20,8 @@
                 <th>Reg.No</th>
                 <th>Date</th>
                 <th>Document</th>
-                <th>Remarks</th>
-                <th ng-if="user_type == '3'">Option</th>
+                <th ng-if="status == 'rejected'">Remarks</th>
+                <th ng-if="user_type == '3' && status == 'rejected'">Option</th>
               </tr>
             </thead>
             <tbody>
@@ -31,8 +31,8 @@
                 <td>{{plan.regdNo}}</td>
                 <td>{{plan.date}}</td>
                 <td><a href="../server/{{plan.file_path}}" target="_blank">View</a></td>
-                <td>{{plan.remark}}</td>
-                <td ng-if="user_type == '3'"> <button ng-click="goToeditplan(plan.id)" type="button" class="btn btn-block btn-info btn-xs" >Edit</button></td>
+                <td ng-if="status == 'rejected'">{{plan.remark}}</td>
+                <td ng-if="user_type == '3' && status == 'rejected'"> <button ng-click="goToeditplan(plan.id)" type="button" class="btn btn-block btn-info btn-xs" >Edit</button></td>
               </tr>
           </table>
         </div>
