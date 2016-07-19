@@ -466,7 +466,7 @@ header('Access-Control-Allow-Origin: *');
 					$date = $this->_request['date'];
 					$regdNo = $this->_request['regdNo'];
 					if($accessToken){
-						$sql = "update ".self::planTable." set name = '$name', regdNo = '$regdNo', date= '$date'";
+						$sql = "update ".self::planTable." set name = '$name', regdNo = '$regdNo', date= '$date',status = 'pending'";
 						if(isset($_FILES['file'])){
 							$file_name = $_FILES['file']['name'];
 							$file_size = $_FILES['file']['size'];
@@ -601,12 +601,24 @@ header('Access-Control-Allow-Origin: *');
 
 				*/
 				public function getPlans() {
+				$headers = apache_request_headers(); // to get all the headers
+						$accessToken = $headers['accessToken'];
+						$status = $this->_request['status'];
+						if($accessToken){
+							$sql = "select id,user_type from ".self::usersTable." where token = '$accessToken'";
+							$rows = $this->executeGenericDQLQuery($sql);
+							$userId = $rows[0]['id'];
+							$usertype = $rows[0]['user_type'];
+						}
 					$sql = "SELECT * FROM ".self::planTable;
-
 					if(isset($this->_request['status'])){
 						$status = $this->_request['status'];
 						$sql.=" where status='$status'";
 					}
+					if($usertype && $usertype == 2)
+ 						$sql .=" AND verifier_id=".$userId;
+ 					else if($usertype && $usertype == 3)
+ 						$sql .=" AND user=".$userId;
 					$rows = $this->executeGenericDQLQuery($sql);
 					$data = array();
 					for($i=0;$i<sizeof($rows);$i++){
