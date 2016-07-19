@@ -1,0 +1,39 @@
+<section class="content-header">
+  <h1>
+    Add Tender
+    <small>Control panel</small>
+  </h1>
+</section>
+<section class="content">
+  <div class="uploadplan">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Upload Tender</h3>
+      </div>
+      <form class="form-horizontal" name="paln">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">Tender Title</label>
+            <div class="col-sm-8" ng-class="{'has-error': (paln.tender_name.$invalid && paln.tender_name.$touched)}">
+              <input type="text" class="form-control" placeholder="Tender Title" name="tender_name" ng-model="tender.tender_name" required >
+              <span class="help-block" ng-show="paln.tender_name.$error.required && paln.tender_name.$touched">Please enter tender title</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-3 control-label">Upload Tender</label>
+            <div class="col-sm-8">
+                <input type = "file" file-model = "myFile" name="tender_filename" ng-model="tender.tender_filename">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-default" ui-sref="buildingPlan">Back</button>
+          <button type="submit" class="btn btn-info pull-right" ng-click="uploadtender()">Submit</button>
+        </div>
+        <!-- /.box-body -->
+
+        <!-- /.box-footer -->
+      </form>
+        <!-- <input type = "file" file-model = "myFile"/>
+         <button ng-click = "uploadFile()">upload me</button> -->
+    </div>
+  </div>
+</section>

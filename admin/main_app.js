@@ -76,6 +76,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url:'/editplan/:id',
       controller:"BuildingPlanController"
     })
+    .state('addtender',{
+       templateUrl:'pages/addtender.html',
+       url:'/addtender',
+       controller:"BuildingPlanController"
+    })
+    .state('advertisementpage',{
+      templateUrl:'pages/advertisementpage.html',
+      url:'/advertisementpage',
+      controller:"BuildingPlanController"
+    })
 });
 app.constant('CONFIG', {
   'HTTP_HOST': '../server/api1.php' //client staging

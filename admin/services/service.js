@@ -174,6 +174,14 @@ app.factory('buildingPlan', function ($http,CONFIG) {
         headers: {'Content-Type': undefined , 'accessToken':localStorage.getItem('accessToken')}
      });
      return response;
+  },
+  uploadadv : function(file,data){
+     console.log('file');
+     console.log('data');
+  },
+  uploadtender : function(file,data){
+    console.log('myFile');
+    console.log('data');
   }
- }
+}
 });

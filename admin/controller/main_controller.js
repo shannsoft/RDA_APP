@@ -325,7 +325,7 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
   $scope.open2 = function() {
    $scope.popup2.opened = true;
  };
-
+//codes for loading plan by status
  $scope.loadPlanByStatus = function(){
    $scope.status = localStorage.getItem('status');
    buildingPlan.loadPlanByStatus($scope.status).then(function(response){
@@ -333,10 +333,12 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
      $scope.planList = response.data.data;
    })
  };
+ //codes for edit plan
  $scope.goToeditplan = function(id){
    console.log(id);
    $state.go('editplan',{id:id});
  }
+ //plans are loaded according to id
  $scope.loadPlanByID = function(){
    var planid = $stateParams.id;
    buildingPlan.loadPlanByID(planid).then(function(pRes) {
@@ -348,6 +350,7 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
      console.log(">>>>>>>>>>>>>   ",err);
    });
  }
+ //codes for update building plan
  $scope.updatebuildingplan = function(){
     var file = $scope.myFile;
     $scope.buildingPlan.date = moment($scope.buildingPlan.date).format("YYYY-MM-DD");
@@ -360,5 +363,31 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
         Util.alertMessage('danger', response.data.message);
       }
     })
- };
+ }
+ //codes for uploading tender
+ $scope.uploadtender=function(){
+   var file = $scope.myFile;
+   console.log('file is' );
+  //  console.dir(file);
+  console.log($scope.tender);
+  console.log( $scope.myFile);
+  // var uploadUrl = CONFIG.HTTP_HOST;
+  //  buildingPlan.uploadtender(file, $scope.tender).then(function(response){
+  //    if(response.data.statusCode == 200){
+  //     // Util.alertMessage('success', response.data.message);
+  //     console.log('response.data.data');
+  //    }
+  //    else{
+  //      //Util.alertMessage('danger', response.data.message);
+  //      console.log('error');
+  //    }
+  //  })
+ }
+ //codes for uploading advertisement
+ $scope.uploadadv = function(){
+   var file = $scope.myFile;
+   console.log('file is' );
+   console.log($scope.adv);
+   console.log($scope.myFile);
+ }
 });
