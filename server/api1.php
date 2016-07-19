@@ -612,10 +612,9 @@ header('Access-Control-Allow-Origin: *');
 						}
 					$sql = "SELECT * FROM ".self::planTable;
 					if(isset($this->_request['status'])){
-						$status = $this->_request['status'];
 						$sql.=" where status='$status'";
 					}
-					if($usertype && $usertype == 2)
+					if($usertype && $usertype == 2 && $status != 'pending')
  						$sql .=" AND verifier_id=".$userId;
  					else if($usertype && $usertype == 3)
  						$sql .=" AND user=".$userId;
