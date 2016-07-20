@@ -273,8 +273,14 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
      console.dir(file);
      console.log($scope.buildingPlan.date);
      $scope.buildingPlan.date = moment($scope.buildingPlan.date).format("YYYY-MM-DD");
-     var uploadUrl = CONFIG.HTTP_HOST;
-     buildingPlan.addbuildingPlan(file, uploadUrl,$scope.buildingPlan).then(function(response){
+     var obj = {
+       "name":$scope.buildingPlan.name,
+       "regd_No":$scope.buildingPlan.regdNo + "/RDA",
+       "fileNo" :"BP/RDA/" + $scope.buildingPlan.fileNo_type + "/" + $scope.buildingPlan.fileNo_date + "/" +$scope.buildingPlan.fileNo_year,
+       "date" : $scope.buildingPlan.date
+      };
+     console.log(obj);
+     buildingPlan.addbuildingPlan(file,obj).then(function(response){
        if(response.data.statusCode == 200){
          Util.alertMessage('success', response.data.message);
        }

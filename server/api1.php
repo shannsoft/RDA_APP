@@ -451,7 +451,7 @@ header('Access-Control-Allow-Origin: *');
 							$rows = $this->executeGenericDQLQuery($sql);
 							$userId = $rows[0]['id'];
 							// saving file and the building plan details in the database
-							$sql = "insert into ".self::planTable."(user,name,file_path,regdNo,file_no,date) values('$userId','$name','$filePath','$fileNo','$regdNo','$date')";
+							$sql = "insert into ".self::planTable."(user,name,file_path,regdNo,file_no,date) values('$userId','$name','$filePath','$regdNo','$fileNo','$date')";
 							// echo $sql;
 							$rows = $this->executeGenericDMLQuery($sql);
 							$this->sendResponse(200,"success",$this->messages['dataSaved']);
@@ -503,7 +503,7 @@ header('Access-Control-Allow-Origin: *');
 						$usertype = $rows[0]['user_type'];
 					}
 					// SELECT  FROM buiding_plan INNER JOIN users ON buiding_plan.user = users.id WHERE buiding_plan.user = 29
-					$sql = "SELECT buiding_plan.id, buiding_plan.user, buiding_plan.name, buiding_plan.regdNo, buiding_plan.file_path, buiding_plan.status, buiding_plan.remark, buiding_plan.date, buiding_plan.asset_name, users.first_name, users.last_name FROM ".self::planTable." INNER JOIN users ON buiding_plan.user = users.id";
+					$sql = "SELECT buiding_plan.id, buiding_plan.user, buiding_plan.name, buiding_plan.regdNo, buiding_plan.file_path, buiding_plan.status, buiding_plan.remark, buiding_plan.date, buiding_plan.asset_name,buiding_plan.file_no, users.first_name, users.last_name FROM ".self::planTable." INNER JOIN users ON buiding_plan.user = users.id";
 					if($usertype && $usertype == 3)
 						$sql .= " where buiding_plan.user=".$userId;
 					if($usertype && $usertype == 2)

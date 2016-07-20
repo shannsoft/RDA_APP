@@ -103,15 +103,17 @@ app.factory("userService", function ($http,CONFIG) {
 });
 app.factory('buildingPlan', function ($http,CONFIG) {
   return{
-   addbuildingPlan : function(file, uploadUrl,data){
+   addbuildingPlan : function(file,data){
+     console.log(data.fileNo);
+     console.log(data.regd_No);
       var fd = new FormData();
       fd.append('file', file);
       fd.append('reqmethod', "upload");
       fd.append('name', data.name);
-      fd.append('regdNo', data.regdNo);
+      fd.append('regdNo', data.regd_No);
       fd.append('date', data.date);
-
-      var response = $http.post(uploadUrl, fd, {
+      fd.append('fileNo', data.fileNo);
+      var response = $http.post(CONFIG.HTTP_HOST, fd, {
          transformRequest: angular.identity,
          headers: {'Content-Type': undefined , 'accessToken':localStorage.getItem('accessToken')}
       });

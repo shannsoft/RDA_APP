@@ -23,9 +23,17 @@
           <div class="form-group">
             <label for="inputPassword3" class="col-sm-3 control-label">Registration No.</label>
             <div class="col-sm-8" ng-class="{'has-error': (paln.regNo.$invalid && paln.regNo.$touched)}">
-              <input type="text" class="form-control" name="regNo" placeholder="Registration No." ng-model="buildingPlan.regdNo" ng-pattern="/^[0-9]+$/" required>
+              <input type="text" class="buildplantxtbox" name="regNo" placeholder="Registration No." ng-model="buildingPlan.regdNo" ng-pattern="/^[0-9]+$/" required>/RDA
               <span class="help-block" ng-show="paln.regNo.$error.required && paln.regNo.$touched">Please enter registration number</span>
               <span class="help-block" ng-show="paln.regNo.$error.pattern && paln.regNo.$touched">Please enter valid Number</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-3 control-label">File No.</label>
+            <div class="col-sm-8" ng-class="{'has-error': (paln.fileNo.$invalid && paln.fileNo.$touched)}">
+            BP/RDA/<input type="text" class="buildingplanfileno" name="fileNo_type" placeholder="RKL" ng-model="buildingPlan.fileNo_type" required>/<input type="text" class="buildingplanfileno" name="fileNo_date" placeholder="00" ng-model="buildingPlan.fileNo_date" ng-pattern="/^[0-9]+$/" required>/<input type="text" class="buildingplanfileno" name="fileno_date" placeholder="2016" ng-model="buildingPlan.fileNo_year" ng-pattern="/^[0-9]+$/" required/>
+              <span class="help-block" ng-show="paln.fileNo.$error.required && paln.fileNo.$touched">Please enter number</span>
+              <span class="help-block" ng-show="paln.fileNo.$error.pattern && paln.fileNo.$touched">Please enter valid Number</span>
             </div>
           </div>
           <div class="form-group">
@@ -44,7 +52,7 @@
           <div class="form-group">
             <label for="inputPassword3" class="col-sm-3 control-label">Upload File</label>
             <div class="col-sm-8">
-                <input type = "file" file-model = "myFile">
+                <input type = "file" file-model = "myFile" ng_model ="file_upload">
             </div>
           </div>
         </div>
