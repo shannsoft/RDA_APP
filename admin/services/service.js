@@ -158,15 +158,16 @@ app.factory('buildingPlan', function ($http,CONFIG) {
     });
     return response;
   },
-  updatebuildingplan : function(file, uploadUrl,data){
+  updatebuildingplan : function(file,data){
      var fd = new FormData();
      fd.append('file', file);
      fd.append('reqmethod', "updatePlan");
      fd.append('name', data.name);
-     fd.append('regdNo', data.regdNo);
+     fd.append('regdNo', data.regd_No);
+     fd.append('fileNo', data.fileNo);
      fd.append('date', data.date);
      fd.append('id',data.id);
-     var response = $http.post(uploadUrl, fd, {
+     var response = $http.post(CONFIG.HTTP_HOST, fd, {
         transformRequest: angular.identity,
         headers: {'Content-Type': undefined , 'accessToken':localStorage.getItem('accessToken')}
      });

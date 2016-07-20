@@ -349,8 +349,13 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
    var planid = $stateParams.id;
    buildingPlan.loadPlanByID(planid).then(function(pRes) {
      if(pRes.status == 200){
-       console.log(pRes);
        $scope.buildingPlan = pRes.data.data;
+       var tempReg = $scope.buildingPlan.regdNo.split('/');
+       var tempfileNo = $scope.buildingPlan.fileNo.split('/');
+       $scope.buildingPlan.regd_No = tempReg[0];
+       $scope.buildingPlan.fileNo_type = tempfileNo[2];
+       $scope.buildingPlan.fileNo_date = tempfileNo[3];
+       $scope.buildingPlan.fileNo_year = tempfileNo[4];
      }
    },function(err) {
      console.log(">>>>>>>>>>>>>   ",err);
@@ -360,8 +365,14 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
  $scope.updatebuildingplan = function(){
     var file = $scope.myFile;
     $scope.buildingPlan.date = moment($scope.buildingPlan.date).format("YYYY-MM-DD");
-    var uploadUrl = CONFIG.HTTP_HOST;
-    buildingPlan.updatebuildingplan(file, uploadUrl,$scope.buildingPlan).then(function(response){
+    var obj = {
+      "name":$scope.buildingPlan.name,
+      "regd_No":$scope.buildingPlan.regd_No + "/RDA",
+      "fileNo" :"BP/RDA/" + $scope.buildingPlan.fileNo_type + "/" + $scope.buildingPlan.fileNo_date + "/" +$scope.buildingPlan.fileNo_year,
+      "date" : $scope.buildingPlan.date,
+      "id":$scope.buildingPlan.id
+    }
+    buildingPlan.updatebuildingplan(file,obj).then(function(response){
       if(response.status == 200){
         Util.alertMessage('success', response.data.message);
       }
@@ -377,8 +388,6 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
    buildingPlan.uploadtender(file, $scope.tender).then(function(response){
      if(response.data.statusCode == 200){
       Util.alertMessage('success', response.data.message);
-      $scope.tender = {};
-      //console.log('response.data.data');
      }
      else{
        Util.alertMessage('danger', response.data.message);
@@ -393,19 +402,10 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
      console.log(response);
      if(response.data.statusCode == 200){
        Util.alertMessage('success', response.data.message);
-       $scope.adv = {};
      }
      else{
        Util.alertMessage('danger', response.data.message);
      }
    });
  }
-//$scope.tender={title:'',details:''};
 })
-// $scope.loadPlanByStatus = function(){
-//   $scope.status = localStorage.getItem('status');
-//   buildingPlan.loadPlanByStatus($scope.status).then(function(response){
-//     console.log(response.data.data);
-//     $scope.planList = response.data.data;
-//   })
-// };
