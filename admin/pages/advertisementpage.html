@@ -13,24 +13,17 @@
       <form class="form-horizontal" name="paln">
         <div class="box-body">
           <div class="form-group">
-            <label for="inputEmail3" class="col-sm-3 control-label">Adv Title</label>
-            <div class="col-sm-8" ng-class="{'has-error': (paln.adv_name.$invalid && paln.adv_name.$touched)}">
-              <input type="text" class="form-control" placeholder="Adv Title" name="adv_name" ng-model="adv.adv_name" required >
-              <span class="help-block" ng-show="paln.adv_name.$error.required && paln.adv_name.$touched">Please enter adv title</span>
-            </div>
+            <label class="col-sm-3 control-label">Adv details</label>
+             <textarea name="adv_text" class="tendertextarea" rows="4" placeholder="Enter adv details" ng-model="adv.details"></textarea>
           </div>
-          <div class="form-group">
-            <label for="inputPassword3" class="col-sm-3 control-label">Upload Adv</label>
-            <div class="col-sm-8">
-                <input type = "file" file-model = "myFile" name="adv_filename" ng-model="adv.adv_filename">
-            </div>
-          </div>
-          <button type="submit" class="btn btn-default" ui-sref="buildingPlan">cancel</button>
-          <button type="submit" class="btn btn-info pull-right" ng-click="uploadadv()">Submit</button>
         </div>
-        <!-- /.box-body -->
-
-        <!-- /.box-footer -->
+        <div class="box-footer">
+          <section  align="center">
+              <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="close()">{{alert.msg}}</alert>
+          </section>
+          <button type="submit" class="btn btn-default" ui-sref="dashboard">Cancel</button>
+          <button type="submit" class="btn btn-info pull-right" ng-click="uploadadv()" ng-disabled="">Submit</button>
+        </div>
       </form>
         <!-- <input type = "file" file-model = "myFile"/>
          <button ng-click = "uploadFile()">upload me</button> -->

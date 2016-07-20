@@ -390,10 +390,24 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
   //  })
  }
  //codes for uploading advertisement
+ $scope.adv = {};
  $scope.uploadadv = function(){
-   var file = $scope.myFile;
-   console.log('file is' );
-   console.log($scope.adv);
-   console.log($scope.myFile);
+   buildingPlan.uploadadv($scope.adv.details).then(function(response){
+     console.log(response);
+     if(response.data.statusCode == 200){
+       Util.alertMessage('success', response.data.message);
+     }
+     else{
+       Util.alertMessage('danger', response.data.message);
+     }
+   });
  }
-});
+
+})
+// $scope.loadPlanByStatus = function(){
+//   $scope.status = localStorage.getItem('status');
+//   buildingPlan.loadPlanByStatus($scope.status).then(function(response){
+//     console.log(response.data.data);
+//     $scope.planList = response.data.data;
+//   })
+// };
