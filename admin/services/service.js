@@ -148,7 +148,12 @@ app.factory('buildingPlan', function ($http,CONFIG) {
     console.log('response');
   },
   loadPlanByStatus:function(status){
-
+    var response = $http.get(CONFIG.HTTP_HOST + "?reqmethod=getPlans&status="+status,{
+      headers: {
+          'accessToken': localStorage.getItem('accessToken')
+      }
+    });
+    return response;
   },
   loadPlanByID:function(id){
     var response = $http.get(CONFIG.HTTP_HOST + "?reqmethod=buildingPlanByID&id="+id,{
