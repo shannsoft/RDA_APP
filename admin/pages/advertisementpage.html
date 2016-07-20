@@ -10,19 +10,22 @@
       <div class="box-header with-border">
         <h3 class="box-title">Upload Advertisement</h3>
       </div>
-      <form class="form-horizontal" name="paln">
+      <form class="form-horizontal" name="advertise">
         <div class="box-body">
           <div class="form-group">
-            <label class="col-sm-3 control-label">Adv details</label>
-             <textarea name="adv_text" class="tendertextarea" rows="4" placeholder="Enter adv details" ng-model="adv.details"></textarea>
+            <label for="inputEmail3" class="col-sm-3 control-label">Adv details</label>
+            <div class="col-sm-8" ng-class="{'has-error': (advertise.adv_text.$invalid && advertise.adv_text.$touched)}">
+              <textarea name="adv_text" class="form-control" rows="4" placeholder="Enter adv details" ng-model="adv.details" required></textarea>
+              <span class="help-block" ng-show="advertise.adv_text.$error.required && advertise.adv_text.$touched">Please enter advertisement details</span>
+            </div>
           </div>
         </div>
         <div class="box-footer">
           <section  align="center">
               <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="close()">{{alert.msg}}</alert>
           </section>
-          <button type="submit" class="btn btn-default" ui-sref="dashboard">Cancel</button>
-          <button type="submit" class="btn btn-info pull-right" ng-click="uploadadv()" ng-disabled="">Submit</button>
+          <button type="submit" class="btn btn-default" ui-sref="dashboard">Back</button>
+          <button type="submit" class="btn btn-info pull-right" ng-click="uploadadv()" ng-disabled="advertise.$invalid">Submit</button>
         </div>
       </form>
         <!-- <input type = "file" file-model = "myFile"/>

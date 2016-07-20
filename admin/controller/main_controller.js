@@ -373,21 +373,18 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
  //codes for uploading tender
  $scope.uploadtender=function(){
    var file = $scope.myFile;
-   console.log('file is' );
-  //  console.dir(file);
-  console.log($scope.tender);
-  console.log( $scope.myFile);
-  // var uploadUrl = CONFIG.HTTP_HOST;
-  //  buildingPlan.uploadtender(file, $scope.tender).then(function(response){
-  //    if(response.data.statusCode == 200){
-  //     // Util.alertMessage('success', response.data.message);
-  //     console.log('response.data.data');
-  //    }
-  //    else{
-  //      //Util.alertMessage('danger', response.data.message);
-  //      console.log('error');
-  //    }
-  //  })
+   var uploadUrl = CONFIG.HTTP_HOST;
+   buildingPlan.uploadtender(file, $scope.tender).then(function(response){
+     if(response.data.statusCode == 200){
+      Util.alertMessage('success', response.data.message);
+      $scope.tender = {};
+      //console.log('response.data.data');
+     }
+     else{
+       Util.alertMessage('danger', response.data.message);
+       //console.log('error');
+     }
+   })
  }
  //codes for uploading advertisement
  $scope.adv = {};
@@ -396,13 +393,14 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
      console.log(response);
      if(response.data.statusCode == 200){
        Util.alertMessage('success', response.data.message);
+       $scope.adv = {};
      }
      else{
        Util.alertMessage('danger', response.data.message);
      }
    });
  }
-
+//$scope.tender={title:'',details:''};
 })
 // $scope.loadPlanByStatus = function(){
 //   $scope.status = localStorage.getItem('status');

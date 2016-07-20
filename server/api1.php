@@ -670,7 +670,7 @@ header('Access-Control-Allow-Origin: *');
 							$rows = $this->executeGenericDQLQuery($sql);
 							$userId = $rows[0]['id'];
 							// saving file and the building plan details in the database
-							$sql = "insert into ".self::tenderTable."(title,file_path,desctiption,user) values('$title','$filePath','$desctiption','$userId')";
+							$sql = "insert into ".self::tenderTable."(title,file_path,description,user) values('$title','$filePath','$desctiption','$userId')";
 							// echo $sql;
 							$rows = $this->executeGenericDMLQuery($sql);
 							$this->sendResponse(200,"success",$this->messages['dataSaved']);

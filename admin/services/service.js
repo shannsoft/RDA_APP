@@ -181,8 +181,18 @@ app.factory('buildingPlan', function ($http,CONFIG) {
     return response;
   },
   uploadtender : function(file,data){
-    console.log('myFile');
-    console.log('data');
-  }
+    //console.log(data.fileNo);
+  //  console.log(data.regd_No);
+     var fd1 = new FormData();
+     fd1.append('file', file);
+     fd1.append('reqmethod', "uploadTender");
+     fd1.append('title', data.title);
+     fd1.append('description', data.details);
+          var response = $http.post(CONFIG.HTTP_HOST, fd1, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined , 'accessToken':localStorage.getItem('accessToken')}
+     });
+     return response;
+  },
 }
 });
