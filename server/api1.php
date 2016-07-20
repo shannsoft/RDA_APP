@@ -19,6 +19,8 @@ header('Access-Control-Allow-Origin: *');
 		// adding table names
 		const usersTable = "users";
 		const planTable = "buiding_plan";
+		const tenderTable = "tender";
+		const advTable = "notification";
 		const planUploadPath = "buildingPlan/";
 
 
@@ -638,6 +640,56 @@ header('Access-Control-Allow-Origin: *');
 						$data[$i]['asset_name'] = $rows[$i]['asset_name'];
 					}
 					$this->sendResponse2(200,$this->messages['dataFetched'],$data);
+				}
+				public function uploadTender() {
+					$headers = apache_request_headers(); // to get all the headers
+					$accessToken = $headers['accessToken'];
+					$title = $this->_request['title'];
+					$desctiption = $this->_request['description'];
+
+					$file_name = $_FILES['file']['name'];
+			    $file_size =$_FILES['file']['size'];
+			    $file_tmp =$_FILES['file']['tmp_name'];
+			    $file_type=$_FILES['file']['type'];
+			    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+			    $extensions = array("pdf");
+
+			    if(in_array($file_ext,$extensions )=== false){
+			     $this->sendResponse(201,"Error","Its allow only pdf file");
+			    }
+			    if($file_size > 2097152){
+			    	// $errors[]='File size cannot exceed 2 MB';
+						$this->sendResponse(201,"Error","File size cannot exceed 2 MB");
+					}
+			    if(empty($errors)==true){
+			        move_uploaded_file($file_tmp,self::planUploadPath.$file_name);
+							$filePath = self::planUploadPath.$file_name;
+
+							// getting the user id details from token
+							$sql = "select id from ".self::usersTable." where token = '$accessToken'";
+							$rows = $this->executeGenericDQLQuery($sql);
+							$userId = $rows[0]['id'];
+							// saving file and the building plan details in the database
+							$sql = "insert into ".self::tenderTable."(title,file_path,desctiption,user) values('$title','$filePath','$desctiption','$userId')";
+							// echo $sql;
+							$rows = $this->executeGenericDMLQuery($sql);
+							$this->sendResponse(200,"success",$this->messages['dataSaved']);
+			    }else{
+			        print_r($errors);
+			    }
+				}
+				public function advertisement(){
+					$headers = apache_request_headers(); // to get all the headers
+					$accessToken = $headers['accessToken'];
+					$desctiption = $this->_request['details'];
+
+					$sql = "select id from ".self::usersTable." where token = '$accessToken'";
+					$rows = $this->executeGenericDQLQuery($sql);
+					$userId = $rows[0]['id'];
+					$sql = "insert into ".self::advTable."(details,user) values('$desctiption','$userId')";
+					// echo $sql;
+					$rows = $this->executeGenericDMLQuery($sql);
+					$this->sendResponse(200,"success",$this->messages['dataSaved']);
 				}
 				public function user() {
 						if(!isset($this->_request['operation']))
