@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2016 at 02:53 PM
+-- Generation Time: Jul 20, 2016 at 07:57 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -31,6 +31,7 @@ CREATE TABLE `buiding_plan` (
   `user` int(11) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `regdNo` varchar(20) DEFAULT NULL,
+  `file_no` varchar(50) NOT NULL,
   `file_path` varchar(100) DEFAULT NULL,
   `status` enum('pending','approved','rejected','') NOT NULL DEFAULT 'pending',
   `verifier_id` int(11) DEFAULT NULL,
@@ -43,10 +44,39 @@ CREATE TABLE `buiding_plan` (
 -- Dumping data for table `buiding_plan`
 --
 
-INSERT INTO `buiding_plan` (`id`, `user`, `name`, `regdNo`, `file_path`, `status`, `verifier_id`, `remark`, `date`, `asset_name`) VALUES
-(43, 29, 'Ashok Kumar Agrawal', '938', 'buildingPlan/Permission-letter-of-Building-Plan.pdf', 'approved', 30, 'asdfasdf', '2016-04-04', NULL),
-(44, 29, 'Bandana Nayak', '943', 'buildingPlan/Permission-letter-of-Building-Plan-2.pdf', 'approved', 30, '', '2016-04-04', NULL),
-(45, 31, 'Test Edit', '123', 'buildingPlan/doc20160409200026.pdf', 'pending', 30, 'Due to wrong file', '2016-06-27', NULL);
+INSERT INTO `buiding_plan` (`id`, `user`, `name`, `regdNo`, `file_no`, `file_path`, `status`, `verifier_id`, `remark`, `date`, `asset_name`) VALUES
+(43, 29, 'Ashok Kumar Agrawal', '938', '', 'buildingPlan/Permission-letter-of-Building-Plan.pdf', 'approved', 30, 'asdfasdf', '2016-04-04', NULL),
+(44, 29, 'Bandana Nayak', '943', '', 'buildingPlan/Permission-letter-of-Building-Plan-2.pdf', 'approved', 30, '', '2016-04-04', NULL),
+(45, 31, 'Test Edit', '123', '', 'buildingPlan/doc20160409200026.pdf', 'rejected', 30, 'Test edit', '2016-06-27', NULL),
+(46, 29, 'Sujata', '123', '', 'buildingPlan/Lawsuit Terms and Conditions.pdf', 'pending', NULL, NULL, '2016-06-28', NULL),
+(47, 29, 'Raj Kumar sahau', '456', '', 'buildingPlan/3822531_TenderDocumentType_5590589.pdf', 'pending', NULL, NULL, '2016-07-04', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `id` int(11) NOT NULL,
+  `details` text NOT NULL,
+  `user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tender`
+--
+
+CREATE TABLE `tender` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `file_path` text NOT NULL,
+  `description` text NOT NULL,
+  `user` int(11) NOT NULL,
+  `verifier_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -74,8 +104,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `user_type`, `user_name`, `mobile`, `password`, `email`, `first_name`, `last_name`, `token`, `status`) VALUES
 (28, '1', 'Admin', '8446753743', 'e10adc3949ba59abbe56e057f20f883e', 'admin@gmail.com', 'Rourkela', 'Admin', '', 1),
 (29, '3', 'santoshRDA', '9438753143', 'e10adc3949ba59abbe56e057f20f883e', 'santosh@gmail.com', 'Krishna', 'Majhi', '', 1),
-(30, '2', 'biswalRDA', '8895368590', 'e10adc3949ba59abbe56e057f20f883e', 'biswal@gmail.com', 'Rajashree', 'Biswal', 'kVOrJlJj1M9CMWpP73kUBQhklw64WO8AuVcQzzGkgZoZcTHisvqfCwUhMb1n', 1),
-(31, '3', 'amareshRDA', '8895368590', 'e10adc3949ba59abbe56e057f20f883e', 'amaresh11@gmail.com', 'Amaresh', 'Nayak', '', 1);
+(30, '2', 'biswalRDA', '8895368590', 'e10adc3949ba59abbe56e057f20f883e', 'biswal@gmail.com', 'Rajashree', 'Biswal', '', 1),
+(31, '3', 'amareshRDA', '8895368590', 'e10adc3949ba59abbe56e057f20f883e', 'amaresh11@gmail.com', 'Amaresh', 'Nayak', 'mqKgA674xTLDaqnhXLcQRwWGnNPDq9y3wHnMC3Y8agBZaYXG3eg3PFerWl6H', 1);
 
 --
 -- Indexes for dumped tables
@@ -88,6 +118,18 @@ ALTER TABLE `buiding_plan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user` (`user`),
   ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tender`
+--
+ALTER TABLE `tender`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -107,7 +149,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `buiding_plan`
 --
 ALTER TABLE `buiding_plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tender`
+--
+ALTER TABLE `tender`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --

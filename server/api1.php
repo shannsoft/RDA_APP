@@ -425,6 +425,7 @@ header('Access-Control-Allow-Origin: *');
 					// $date = date("m/d/Y", strto	time($this->_request['date']));
 				  // $date = date("Y-m-d H:i:s",);//getdate($this->_request['date']);//date("Y-m-d",$this->_request['date']);//$this->_request['date']; //date('d-m-Y', $this->_request['date']);
 					$regdNo = $this->_request['regdNo'];
+					$fileNo = $this->_request['fileNo'];
 
 					// getting the file information
 					$file_name = $_FILES['file']['name'];
@@ -450,7 +451,7 @@ header('Access-Control-Allow-Origin: *');
 							$rows = $this->executeGenericDQLQuery($sql);
 							$userId = $rows[0]['id'];
 							// saving file and the building plan details in the database
-							$sql = "insert into ".self::planTable."(user,name,file_path,regdNo,date) values('$userId','$name','$filePath','$regdNo','$date')";
+							$sql = "insert into ".self::planTable."(user,name,file_path,regdNo,file_no,date) values('$userId','$name','$filePath','$fileNo','$regdNo','$date')";
 							// echo $sql;
 							$rows = $this->executeGenericDMLQuery($sql);
 							$this->sendResponse(200,"success",$this->messages['dataSaved']);
@@ -465,8 +466,9 @@ header('Access-Control-Allow-Origin: *');
 					$name = $this->_request['name'];
 					$date = $this->_request['date'];
 					$regdNo = $this->_request['regdNo'];
+					$fileNo = $this->_request['fileNo'];
 					if($accessToken){
-						$sql = "update ".self::planTable." set name = '$name', regdNo = '$regdNo', date= '$date',status = 'pending'";
+						$sql = "update ".self::planTable." set name = '$name', regdNo = '$regdNo', file_no='$fileNo', date= '$date',status = 'pending'";
 						if(isset($_FILES['file'])){
 							$file_name = $_FILES['file']['name'];
 							$file_size = $_FILES['file']['size'];
@@ -513,6 +515,7 @@ header('Access-Control-Allow-Origin: *');
 						$plan[$i]['user_id'] = $rows[$i]['user'];
 						$plan[$i]['name'] = $rows[$i]['name'];
 						$plan[$i]['regdNo'] = $rows[$i]['regdNo'];
+						$plan[$i]['fileNo'] = $rows[$i]['file_no'];
 						$plan[$i]['filepath'] = $rows[$i]['file_path'];
 						$plan[$i]['status'] = $rows[$i]['status'];
 						$plan[$i]['remark'] = $rows[$i]['remark'];
@@ -538,6 +541,7 @@ header('Access-Control-Allow-Origin: *');
 						$plan['user_id'] = $rows[0]['user'];
 						$plan['name'] = $rows[0]['name'];
 						$plan['regdNo'] = $rows[0]['regdNo'];
+						$plan['fileNo'] = $rows[0]['file_no'];
 						$plan['filepath'] = $rows[0]['file_path'];
 						$plan['status'] = $rows[0]['status'];
 						$plan['remark'] = $rows[0]['remark'];
@@ -625,6 +629,7 @@ header('Access-Control-Allow-Origin: *');
 						$data[$i]['user'] = $rows[$i]['user'];
 						$data[$i]['name'] = $rows[$i]['name'];
 						$data[$i]['regdNo'] = $rows[$i]['regdNo'];
+						$data[$i]['fileNo'] = $rows[$i]['file_no'];
 						$data[$i]['file_path'] = $rows[$i]['file_path'];
 						$data[$i]['status'] = $rows[$i]['status'];
 						$data[$i]['verifier_id'] = $rows[$i]['verifier_id'];
