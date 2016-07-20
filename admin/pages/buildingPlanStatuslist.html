@@ -18,6 +18,7 @@
                 <th>SL.NO</th>
                 <th>Name</th>
                 <th>Reg.No</th>
+                <th>File no</th>
                 <th>Date</th>
                 <th>Document</th>
                 <th ng-if="status == 'rejected'">Remarks</th>
@@ -29,6 +30,7 @@
                 <td>{{$index+1}}</td>
                 <td>{{plan.name}}</td>
                 <td>{{plan.regdNo}}</td>
+                <td>{{plan.fileNo}}</td>
                 <td>{{plan.date}}</td>
                 <td><a href="../server/{{plan.file_path}}" target="_blank">View</a></td>
                 <td ng-if="status == 'rejected'">{{plan.remark}}</td>
