@@ -14,7 +14,9 @@ header('Access-Control-Allow-Origin: *');
 
 		const DB_SERVER = "localhost";
 		const DB_USER = "root";
+		// const DB_USER = "goapps";
 		const DB_PASSWORD = "";
+		// const DB_PASSWORD = "goapps123";
 	  const DB = "rda_123";
 		// adding table names
 		const usersTable = "users";
@@ -420,7 +422,7 @@ header('Access-Control-Allow-Origin: *');
 				}
 				public function upload() {
 					$headers = apache_request_headers(); // to get all the headers
-					$accessToken = $headers['accessToken'];
+					$accessToken = $headers['Accesstoken'];
 					// fetching the details of the plan
 					$name = $this->_request['name'];
 					$date = $this->_request['date'];
@@ -463,7 +465,7 @@ header('Access-Control-Allow-Origin: *');
 				}
 				public function updatePlan() {
 					$headers = apache_request_headers(); // to get all the headers
-					$accessToken = $headers['accessToken'];
+					$accessToken = $headers['Accesstoken'];
 					$plan_id = $this->_request['id'];
 					$name = $this->_request['name'];
 					$date = $this->_request['date'];
@@ -497,7 +499,7 @@ header('Access-Control-Allow-Origin: *');
 				}
 				public function allBuildingPlan(){
 					$headers = apache_request_headers(); // to get all the headers
-					$accessToken = $headers['accessToken'];
+					$accessToken = $headers['Accesstoken'];
 					if($accessToken){
 						$sql = "select id,user_type from ".self::usersTable." where token = '$accessToken'";
 						$rows = $this->executeGenericDQLQuery($sql);
@@ -531,7 +533,7 @@ header('Access-Control-Allow-Origin: *');
 				}
 				public function buildingPlanByID(){
 					$headers = apache_request_headers(); // to get all the headers
-					$accessToken = $headers['accessToken'];
+					$accessToken = $headers['Accesstoken'];
 					$id = $this->_request['id'];
 					if($accessToken){
 						$sql = "select id,user_type from ".self::usersTable." where token = '$accessToken'";
@@ -566,7 +568,7 @@ header('Access-Control-Allow-Origin: *');
 				}
 				public function planCount() {
 					$headers = apache_request_headers(); // to get all the headers
-					$accessToken = $headers['accessToken'];
+					$accessToken = $headers['Accesstoken'];
 					if($accessToken){
 						$sql = "select id,user_type from ".self::usersTable." where token = '$accessToken'";
 						$rows = $this->executeGenericDQLQuery($sql);
@@ -608,7 +610,7 @@ header('Access-Control-Allow-Origin: *');
 				*/
 				public function getPlans() {
 				$headers = apache_request_headers(); // to get all the headers
-						$accessToken = $headers['accessToken'];
+						$accessToken = $headers['Accesstoken'];
 						$status = $this->_request['status'];
 						if($accessToken){
 							$sql = "select id,user_type from ".self::usersTable." where token = '$accessToken'";
@@ -643,7 +645,7 @@ header('Access-Control-Allow-Origin: *');
 				}
 				public function uploadTender() {
 					$headers = apache_request_headers(); // to get all the headers
-					$accessToken = $headers['accessToken'];
+					$accessToken = $headers['Accesstoken'];
 					$title = $this->_request['title'];
 					$desctiption = $this->_request['description'];
 
@@ -680,7 +682,7 @@ header('Access-Control-Allow-Origin: *');
 				}
 				public function advertisement(){
 					$headers = apache_request_headers(); // to get all the headers
-					$accessToken = $headers['accessToken'];
+					$accessToken = $headers['Accesstoken'];
 					$desctiption = $this->_request['details'];
 
 					$sql = "select id from ".self::usersTable." where token = '$accessToken'";
