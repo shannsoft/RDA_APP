@@ -385,6 +385,8 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
  $scope.uploadtender=function(){
    var file = $scope.myFile;
    var uploadUrl = CONFIG.HTTP_HOST;
+   $scope.tender.date = moment($scope.tender.date).format("YYYY-MM-DD");
+   console.log($scope.tender.date);
    buildingPlan.uploadtender(file, $scope.tender).then(function(response){
      if(response.data.statusCode == 200){
       Util.alertMessage('success', response.data.message);
@@ -398,7 +400,8 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
  //codes for uploading advertisement
  $scope.adv = {};
  $scope.uploadadv = function(){
-   buildingPlan.uploadadv($scope.adv.details).then(function(response){
+ $scope.adv.date = moment($scope.adv.date).format("YYYY-MM-DD");
+   buildingPlan.uploadadv($scope.adv).then(function(response){
      console.log(response);
      if(response.data.statusCode == 200){
        Util.alertMessage('success', response.data.message);
@@ -407,5 +410,15 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
        Util.alertMessage('danger', response.data.message);
      }
    });
+ }
+ $scope.deletePlan = function(id){
+   buildingPlan.deletePlan(id).then(function(pRes) {
+     if(pRes.status == 200){
+       $scope.loadbuildingPlan();
+     }
+   },
+   function(err) {
+     console.log(">>>>>>>>>>>>>   ",err);
+   })
  }
 })

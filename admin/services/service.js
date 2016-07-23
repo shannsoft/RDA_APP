@@ -178,8 +178,8 @@ app.factory('buildingPlan', function ($http,CONFIG) {
      });
      return response;
   },
-  uploadadv : function(details){
-    var response = $http.get(CONFIG.HTTP_HOST + "?reqmethod=advertisement&details="+details,{
+  uploadadv : function(data){
+    var response = $http.get(CONFIG.HTTP_HOST + "?reqmethod=advertisement&details="+data.details+"&date="+data.date,{
       headers: {
           'Accesstoken': localStorage.getItem('accessToken')
       }
@@ -194,11 +194,20 @@ app.factory('buildingPlan', function ($http,CONFIG) {
      fd1.append('reqmethod', "uploadTender");
      fd1.append('title', data.title);
      fd1.append('description', data.details);
+     fd1.append('date',data.date);
           var response = $http.post(CONFIG.HTTP_HOST, fd1, {
         transformRequest: angular.identity,
         headers: {'Content-Type': undefined , 'Accesstoken':localStorage.getItem('accessToken')}
      });
      return response;
+  },
+  deletePlan : function(id){
+    var response = $http.get(CONFIG.HTTP_HOST + "?reqmethod=deletePlan&id="+id,{
+      headers: {
+          'Accesstoken': localStorage.getItem('accessToken')
+      }
+    });
+    return response;
   },
 }
 });

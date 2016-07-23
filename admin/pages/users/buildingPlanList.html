@@ -23,6 +23,7 @@
                 <th>Date</th>
                 <th>Document</th>
                 <th>Status</th>
+                <th ng-if="user_type =='3'">Options</th>
                 <th ng-if="user_type != '3'">Upload By</th>
                 <th ng-if="user_type == '2'">Remarks</th>
               </tr>
@@ -40,6 +41,12 @@
                   <button ng-if="user_type == '2'" class="label label-success" ng-click="planAcceptance(plan.remark,'approved',plan.id)">Accepts</button>
                   <button ng-if="user_type == '2'" ng-disabled="plan.remark == null || plan.remark == ''" class="label label-danger" ng-click="planAcceptance(plan.remark,'rejected',plan.id)">Reject</button>
                 </td>
+                <td ng-if="user_type =='3'">
+                    <a href="" class="option-btn" ng-if="plan.status=='pending'" ng-click="deletePlan(plan.id)"><i class="fa fa-trash"></i></a>
+                    <a href="" class="option-btn" ng-if="plan.status=='approved'"><i class="fa fa-check"></i></a>
+                    <a href="" class="option-btn" ng-if="plan.status=='rejected'"><i class="fa fa-times"></i></a>
+                </td>
+
                 <td ng-if="user_type != '3'">{{plan.users.first_name+' '+plan.users.last_name}}</td>
                 <td ng-if="user_type == '2'">
                   <input type="text"  class="form-control" name="remarks" ng-model="plan.remark" placeholder="Remarks">

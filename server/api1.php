@@ -660,7 +660,6 @@ header('Access-Control-Allow-Origin: *');
 					$title = $this->_request['title'];
 					$desctiption = $this->_request['description'];
 					$date = $this->_request['date'];
-
 					$file_name = $_FILES['file']['name'];
 			    $file_size =$_FILES['file']['size'];
 			    $file_tmp =$_FILES['file']['tmp_name'];
