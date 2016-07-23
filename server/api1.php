@@ -659,6 +659,7 @@ header('Access-Control-Allow-Origin: *');
 					$accessToken = $headers['Accesstoken'];
 					$title = $this->_request['title'];
 					$desctiption = $this->_request['description'];
+					$date = $this->_request['date'];
 
 					$file_name = $_FILES['file']['name'];
 			    $file_size =$_FILES['file']['size'];
@@ -683,7 +684,7 @@ header('Access-Control-Allow-Origin: *');
 							$rows = $this->executeGenericDQLQuery($sql);
 							$userId = $rows[0]['id'];
 							// saving file and the building plan details in the database
-							$sql = "insert into ".self::tenderTable."(title,file_path,description,user) values('$title','$filePath','$desctiption','$userId')";
+							$sql = "insert into ".self::tenderTable."(title,file_path,description,user,date) values('$title','$filePath','$desctiption','$userId','$date')";
 							// echo $sql;
 							$rows = $this->executeGenericDMLQuery($sql);
 							$this->sendResponse(200,"success",$this->messages['dataSaved']);
@@ -695,11 +696,12 @@ header('Access-Control-Allow-Origin: *');
 					$headers = apache_request_headers(); // to get all the headers
 					$accessToken = $headers['Accesstoken'];
 					$desctiption = $this->_request['details'];
+					$date = $this->_request['date'];
 
 					$sql = "select id from ".self::usersTable." where token = '$accessToken'";
 					$rows = $this->executeGenericDQLQuery($sql);
 					$userId = $rows[0]['id'];
-					$sql = "insert into ".self::advTable."(details,user) values('$desctiption','$userId')";
+					$sql = "insert into ".self::advTable."(details,user,date) values('$desctiption','$userId','$date')";
 					// echo $sql;
 					$rows = $this->executeGenericDMLQuery($sql);
 					$this->sendResponse(200,"success",$this->messages['dataSaved']);
