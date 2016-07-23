@@ -115,14 +115,14 @@ app.factory('buildingPlan', function ($http,CONFIG) {
       fd.append('fileNo', data.fileNo);
       var response = $http.post(CONFIG.HTTP_HOST, fd, {
          transformRequest: angular.identity,
-         headers: {'Content-Type': undefined , 'accessToken':localStorage.getItem('accessToken')}
+         headers: {'Content-Type': undefined , 'Accesstoken':localStorage.getItem('accessToken')}
       });
       return response;
    },
    getAllBuildingPlan : function(){
      console.log('121212121');
      var response = $http.get(CONFIG.HTTP_HOST+"/?reqmethod=allBuildingPlan",{
-        headers: {'accessToken':localStorage.getItem('accessToken')}
+        headers: {'Accesstoken':localStorage.getItem('accessToken')}
       });
      return response;
    },
@@ -141,7 +141,7 @@ app.factory('buildingPlan', function ($http,CONFIG) {
    buildingPlanstatus: function () {
     var response = $http.get(CONFIG.HTTP_HOST + "/?reqmethod=planCount", {
         headers: {
-            'accessToken': localStorage.getItem('accessToken')
+            'Accesstoken': localStorage.getItem('accessToken')
         }
     });
     return response;
@@ -150,7 +150,7 @@ app.factory('buildingPlan', function ($http,CONFIG) {
   loadPlanByStatus:function(status){
     var response = $http.get(CONFIG.HTTP_HOST + "?reqmethod=getPlans&status="+status,{
       headers: {
-          'accessToken': localStorage.getItem('accessToken')
+          'Accesstoken': localStorage.getItem('accessToken')
       }
     });
     return response;
@@ -158,7 +158,7 @@ app.factory('buildingPlan', function ($http,CONFIG) {
   loadPlanByID:function(id){
     var response = $http.get(CONFIG.HTTP_HOST + "?reqmethod=buildingPlanByID&id="+id,{
       headers: {
-          'accessToken': localStorage.getItem('accessToken')
+          'Accesstoken': localStorage.getItem('accessToken')
       }
     });
     return response;
@@ -174,14 +174,14 @@ app.factory('buildingPlan', function ($http,CONFIG) {
      fd.append('id',data.id);
      var response = $http.post(CONFIG.HTTP_HOST, fd, {
         transformRequest: angular.identity,
-        headers: {'Content-Type': undefined , 'accessToken':localStorage.getItem('accessToken')}
+        headers: {'Content-Type': undefined , 'Accesstoken':localStorage.getItem('accessToken')}
      });
      return response;
   },
   uploadadv : function(details){
     var response = $http.get(CONFIG.HTTP_HOST + "?reqmethod=advertisement&details="+details,{
       headers: {
-          'accessToken': localStorage.getItem('accessToken')
+          'Accesstoken': localStorage.getItem('accessToken')
       }
     });
     return response;
@@ -196,7 +196,7 @@ app.factory('buildingPlan', function ($http,CONFIG) {
      fd1.append('description', data.details);
           var response = $http.post(CONFIG.HTTP_HOST, fd1, {
         transformRequest: angular.identity,
-        headers: {'Content-Type': undefined , 'accessToken':localStorage.getItem('accessToken')}
+        headers: {'Content-Type': undefined , 'Accesstoken':localStorage.getItem('accessToken')}
      });
      return response;
   },

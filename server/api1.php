@@ -78,7 +78,8 @@ header('Access-Control-Allow-Origin: *');
 				"loginSuccess" => "successfully Logedin",
 				"userLogout" => "Successfully log out",
 				"changedPassword" => "Successfully Changed your password",
-				"dataSaved" => "Data saved successfully"
+				"dataSaved" => "Data saved successfully",
+				"planDeleted" => "Plan Successfully Deleted"
 		);
 
 		public function __construct(){
@@ -564,6 +565,16 @@ header('Access-Control-Allow-Origin: *');
 					$result = $this->executeGenericDMLQuery($sql);
 					if($result){
 						$this->sendResponse2(200,$this->messages['userUpdated']);
+					}
+				}
+				public function deletePlan(){
+					$headers = apache_request_headers(); // to get all the headers
+					$accessToken = $headers['Accesstoken'];
+					$id = $this->_request['id'];
+					$sql = "DELETE FROM ".self::planTable." where id=".$id;
+					$result = $this->executeGenericDMLQuery($sql);
+					if($result){
+						$this->sendResponse2(200,$this->messages['planDeleted']);
 					}
 				}
 				public function planCount() {
