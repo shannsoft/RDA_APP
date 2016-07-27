@@ -72,7 +72,7 @@
               <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="close()">{{alert.msg}}</alert>
           </section>
           <button type="submit" class="btn btn-default" ui-sref="buildingPlan">Back</button>
-          <button type="submit" class="btn btn-info pull-right" ng-click="uploadBuildingPlan()" ng-disabled="plan.$invalid || paln.regNo.$invalid  || paln.full_name.$invalid   || !buildingPlan.date">Submit</button>
+          <button type="submit" class="btn btn-info pull-right" ng-click="uploadBuildingPlan()" ng-disabled="plan.$invalid || paln.regNo.$invalid  || paln.full_name.$invalid   || !buildingPlan.date">Submit<i ng-show="showPreload" class="fa fa-spinner fa-spin right m-l-5" aria-hidden="true"></i></button>
         </div>
         <!-- /.box-footer -->
       </form>

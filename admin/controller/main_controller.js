@@ -268,6 +268,7 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
   /*********This is use for upload a building plan********/
   /*******************************************************/
   $scope.uploadBuildingPlan = function(){
+    $scope.showPreload = true;
      var file = $scope.myFile;
      console.log('file is ' );
      console.dir(file);
@@ -281,6 +282,7 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
       };
      console.log(obj);
      buildingPlan.addbuildingPlan(file,obj).then(function(response){
+       $scope.showPreload = false;
        if(response.data.statusCode == 200){
          Util.alertMessage('success', response.data.message);
        }
@@ -363,6 +365,7 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
  }
  //codes for update building plan
  $scope.updatebuildingplan = function(){
+   $scope.showPreload = true;
     var file = $scope.myFile;
     $scope.buildingPlan.date = moment($scope.buildingPlan.date).format("YYYY-MM-DD");
     var obj = {
@@ -373,6 +376,7 @@ app.controller("BuildingPlanController",function($scope,$stateParams,$rootScope,
       "id":$scope.buildingPlan.id
     }
     buildingPlan.updatebuildingplan(file,obj).then(function(response){
+      $scope.showPreload = false;
       if(response.status == 200){
         Util.alertMessage('success', response.data.message);
       }
